@@ -122,6 +122,6 @@ app.get('/name/:name', (req, res) => {
         const resultado = data.items.filter(skin => skin.nombre.replace(' ', '+').toLowerCase() == req.params.name.toLowerCase())
         res.send(resultado)
     } else {
-        res.status(404).send(`No existe ninguna skin que se llame ${req.params.name}`)
+        res.status(404).send(`No existe ninguna skin que se llame ${req.params.name.replace('+',' ')}`)
     }
 })
