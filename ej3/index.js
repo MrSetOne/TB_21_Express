@@ -6,6 +6,10 @@ const app = express();
 const Logger = require('logplease');
 const logger = Logger.create('Server', { showTimestamp: false, showLevel: false, color: Logger.Colors.Blue });
 
+//Importacion de cors
+const cors = require('cors');
+app.use(cors())
+
 // Declaracion del puerto que usaremos
 const port = '3000';
 
@@ -25,7 +29,7 @@ const data = {
         { id: 3, nombre: 'Vandal Reaver', precio: 25, img: 'https://images.cults3d.com/xKPXl990MeZAqGESHaRFxJD-ALE=/https://files.cults3d.com/uploaders/21595173/illustration-file/46148bbb-d608-415c-ba77-33de66c34842/Valorant-Reaver-Collection-Vandal-HD.jpg' },
         { id: 4, nombre: 'Operator Elderflame', precio: 43, img: 'https://i.blogs.es/c9b0c5/valorant/1366_2000.jpeg' },
         { id: 5, nombre: 'Operator ION', precio: 43, img: 'https://i.ytimg.com/vi/TC7Lf6Fq9ss/maxresdefault.jpg' },
-        { id: 6, nombre: 'Mariposa RGX11ZPRO 2.0', precio: 45, img: 'https://i0.wp.com/twinfinite.net/wp-content/uploads/2022/04/Melee_RGX_11z_Pro_2022_v3_TopFront34.jpg?resize=600%2C338&ssl=1' }
+        { id: 6, nombre: 'Mariposa RGX11ZPRO', precio: 45, img: 'https://i0.wp.com/twinfinite.net/wp-content/uploads/2022/04/Melee_RGX_11z_Pro_2022_v3_TopFront34.jpg?resize=600%2C338&ssl=1' }
     ]
 }
 
@@ -41,9 +45,9 @@ app.post('/', (req, res) => {
     if (!req.body.nombre || !req.body.precio) {
         res.status(400).send(`Rellena todos los campos obligatorios`)
     } else {
-        logger.log(`${nuevoProducto.nombre} se ha añadido correctamente con la id: ${nuevoProducto.id}`)
-        res.status(201).send(`${nuevoProducto.nombre} se ha añadido correctamente con la id: ${nuevoProducto.id}`)
-        data.items.push(nuevoProducto)
+        logger.log(`${nuevoProducto.nombre} se ha añadido correctamente con la id: ${nuevoProducto.id}`);
+        data.items.push(nuevoProducto);
+        res.status(201).send(data.items)
     }
 });
 
@@ -67,7 +71,7 @@ app.delete('/:id', (req, res) => {
     const existe = data.items.some(skin => skin.id === +req.params.id)
     if (existe) {
         data.items = data.items.filter(skin => skin.id !== +req.params.id)
-        res.status(200).send(`La skin con id:${req.params.id} ha sido eliminada`)
+        res.status(200).send(data.items)
     } else {
         res.status(404).send(`El id:${req.params.id} no existe`)
     }
@@ -123,5 +127,13 @@ app.get('/name/:name', (req, res) => {
         res.send(resultado)
     } else {
         res.status(404).send(`No existe ninguna skin que se llame ${req.params.name.replace('+',' ')}`)
+    }
+})
+
+app.get('/', (req, res) => {
+    if (data.items.length == 0) {
+        res.status(404).send('No hay skins')
+    } else {
+        res.send(data.items)
     }
 })

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c569a510c1.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="./visual.js"></script>
+
+    <title>ValoApi</title>
+</head>
+
+<body>
+    <header>
+        <img src="./assets/logo.png">
+        <img src="./assets/letters.png">
+        <img src="./assets/logo.png">
+    </header>
+    <main>
+        <section id="wellcome" class=" flex">
+            <h1>¡Bienvenido!</h1>
+            <button>Empezar</button>
+        </section>
+        <section id="cat" class="d-none">
+            <h2>Todas las Skins</h2>
+            <div id="contenedor">
+            </div>
+            <button id="toAdd">Insertar</button>
+        </section>
+        <section id="add" class="d-none">
+            <h2>Insertar nueva</h2>
+            <form>
+                <div class="formitem">
+                    <label for="nombre">Skin</label>
+                    <input type="text" name="nombre" id="nombre">
+                </div>
+                <div class="formitem">
+                    <label for="precio">Precio</label>
+                    <input type="text" name="precio" id="precio">
+                </div>
+                <div class="formitem">
+                    <label for="imagen">Imagen</label>
+                    <input type="text" name="imagen" id="imagen">
+                </div>
+                <button id="submit">Enviar</button>
+                <button id="back">Ver todas</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
