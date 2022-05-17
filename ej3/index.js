@@ -109,3 +109,19 @@ app.get('/:id', (req, res) => {
         res.status(404).send(`No existe ninguna skin con la id ${req.params.id}`)
     }
 })
+
+app.get('/name/:name', (req, res) => {
+    const solicitud = req.params.name.toLowerCase();
+    let esta = false
+    data.items.forEach(skin => {
+        if (skin.nombre.replace(' ', '+').toLowerCase() == req.params.name.toLowerCase()) {
+            esta = true;
+        }
+    });
+    if (esta) {
+        const resultado = data.items.filter(skin => skin.nombre.replace(' ', '+').toLowerCase() == req.params.name.toLowerCase())
+        res.send(resultado)
+    } else {
+        res.status(404).send(`No existe ninguna skin que se llame ${req.params.name}`)
+    }
+})
